@@ -3,10 +3,9 @@ package correio;
 import java.util.*;
 
 public class CaixaPostal {
-	
+
 	private String nome;
 	private Cidade cidade;
-	private int qtdCartas;
 	private Vector<Carta> cartas = new Vector<Carta>();
 	
 	public CaixaPostal(String nome, Cidade cidade) {
@@ -19,10 +18,25 @@ public class CaixaPostal {
 		return nome+" criada com sucesso!";
 	}
 	
-	public void depositarCartas(Vector<Carta> cartas) {
+	public synchronized void depositarCartas(Vector<Carta> cartas) {
 		for (Carta carta : cartas) {
 			this.cartas.add(carta);
-			//System.out.println(carta+" depositada com sucesso!");
+			System.out.println(carta+" depositada com sucesso na cidade "+cidade+"! \nTOTAL: "+this.cartas.size()+" cartas.");
 		}
+	}
+	
+	public synchronized Vector<Carta> retirarCartasParaEntrega(int qtdCartas) {
+		Vector<Carta> crtsTmp = new Vector<Carta>();
+		
+		for (int i = 0; i < qtdCartas; i++) {
+			crtsTmp.add(cartas.get(i));
+			cartas.remove(i);
+		}
+		
+		return crtsTmp;
+	}
+	
+	public Vector<Carta> getCartas() {
+		return cartas;
 	}
 }
