@@ -27,6 +27,7 @@ public class Pombo extends Thread {
 	
 	@Override
 	public void run() {
+		setPriority(MAX_PRIORITY);
 		while(true) {
 			entregarCartas();
 			voltarParaCidadeA();
@@ -34,15 +35,17 @@ public class Pombo extends Thread {
 	}
 
 	public void entregarCartas() {
-		if(!checarCaixaPostal()) { //Não tem cartas suficientes ainda...
+		if(!caixaPostalA.checarQtdCartas(QTDMAX_CARTAS)) { //Não tem cartas suficientes ainda...
 			synchronized (caixaPostalA) {
 				try {
+					System.out.println("*** [Não há cartas suficientes, o "+getName()+" vai aguardar na fila...] ***");
 					caixaPostalA.wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		} else { //Tem cartas suficientes, vamos entregar!
+			System.out.println("*** [Há cartas suficientes, o "+getName()+" vai iniciar a entrega!] ***");
 			cartas.addAll(caixaPostalA.retirarCartasParaEntrega(QTDMAX_CARTAS));
 			try {
 				Thread.sleep(10000); //10s para realizar a entrega...
@@ -60,12 +63,14 @@ public class Pombo extends Thread {
 		if(!autorizacaoParaVoltar) { //Não pode voltar para cidade 
 			synchronized (gaiola) {
 				try {
+					System.out.println("*** [Ainda não autorizado a voltar, o "+getName()+" vai aguardar na gaiola!] ***");
 					gaiola.wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 		} else {
+			System.out.println("*** ["+getName()+" autorizando, voltando agora!] ***");
 			cidade = Cidade.A; //Altera em qual cidade ele está
 			try {
 				Thread.sleep(10000); //10s para realizar a travessia...
@@ -77,13 +82,6 @@ public class Pombo extends Thread {
 	
 	public synchronized void autorizaVolta() {
 		autorizacaoParaVoltar = true;
-	}
-	
-	public boolean checarCaixaPostal() {
-		if(caixaPostalA.getCartas().size() < QTDMAX_CARTAS)
-			return false;
-		else
-			return true;
 	}
 
 	public Cidade getCidade() {

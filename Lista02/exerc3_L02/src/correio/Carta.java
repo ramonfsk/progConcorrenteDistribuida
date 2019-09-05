@@ -12,4 +12,8 @@ public class Carta {
 		Carta novaCarta = new Carta(nome);
 		return novaCarta;
 	}*/
+	
+	public String getNome() {
+		return nome;
+	}
 }

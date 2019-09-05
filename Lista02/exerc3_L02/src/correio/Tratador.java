@@ -13,6 +13,7 @@ public class Tratador extends Thread {
 	
 	@Override
 	public void run() {
+		setPriority(NORM_PRIORITY);
 		while(true)
 			checarGaiola();
 	}
@@ -20,11 +21,14 @@ public class Tratador extends Thread {
 	public void checarGaiola() {
 		if(gaiola.getPombos().size() < QTDMIN_POMBOS) { //Qtd de pombos insuficiente...
 			try {
-				Thread.sleep(1000 * QTD_TEMPOS);
+				System.out.println("*** [Não há pombos suficientes para abrir a gaiola!] ***");
+				System.out.println("*** [O Tratador vai aguardar 60s...] ***");
+				Thread.sleep(60000 * QTD_TEMPOS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		} else { //Qtd suficiente, autorizando saída dos pombos!
+			System.out.println("*** [Há pombos suficientes, abrindo gaiola!] ***");
 			for (Pombo pombo : gaiola.getPombos())
 				pombo.autorizaVolta(); //Autoriza a volta do pombo!
 			gaiola.abreGaiola(gaiola.getPombos()); //Remove todos os pombos da gaiola!

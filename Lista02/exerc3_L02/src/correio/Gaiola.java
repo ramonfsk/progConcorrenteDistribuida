@@ -16,7 +16,7 @@ public class Gaiola {
 	public synchronized void abreGaiola(Vector<Pombo> pombos) {
 		pombos.removeAll(pombos);
 		System.out.println("Todos os pombos sairam da gaiola!");
-		pombos.notifyAll();
+		notifyAll();
 	}
 
 	public Vector<Pombo> getPombos() {

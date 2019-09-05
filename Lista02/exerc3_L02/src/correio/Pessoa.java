@@ -19,11 +19,12 @@ public class Pessoa extends Thread {
 	
 	@Override
 	public void run() {
+		setPriority(MIN_PRIORITY);
 		while(true) {
 			escreverCarta();
 			dpstrCartas();
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(60000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -36,9 +37,9 @@ public class Pessoa extends Thread {
 	
 	public void escreverCarta() {
 		Random r = new Random();
-		String alfabeto = "S3XY";
+		String alfabeto = "S3XY01245";
 		String nomeRand = "Carta ";
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 			nomeRand += (alfabeto.charAt(r.nextInt(alfabeto.length())));
 		
 		Carta carta = new Carta(nomeRand);
