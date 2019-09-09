@@ -1,4 +1,4 @@
-package banheiro_v2;
+package lista;
 
 public class Lista {
 	private String[] elementos = new String[1000];
@@ -7,6 +7,16 @@ public class Lista {
 	public synchronized void adicionaElementos(String elemento) {
 		this.elementos[indice] = elemento;
 		this.indice++;
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(this.indice == this.elementos.length) {
+			System.out.println("Lista cheia, notificando...");
+			this.notify();
+		}
 	}
 	
 	public int tamanho() {
@@ -15,5 +25,9 @@ public class Lista {
 	
 	public String pegaElemento(int posicao) {
 		return this.elementos[posicao];
+	}
+
+	public boolean estaCheia() {
+		return this.indice == this.tamanho();
 	}
 }

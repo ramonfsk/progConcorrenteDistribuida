@@ -1,13 +1,11 @@
-package banheiro_v2;
-
-import java.util.List;
+package lista;
 
 public class TarefaAdicionarElemento implements Runnable {
 
-	private List<String> lista;
+	private Lista lista;
 	private int numeroThread;
 	
-	public TarefaAdicionarElemento(List<String> lista, int numeroThread) {
+	public TarefaAdicionarElemento(Lista lista, int numeroThread) {
 		this.lista = lista;
 		this.numeroThread = numeroThread;
 	}
@@ -15,7 +13,7 @@ public class TarefaAdicionarElemento implements Runnable {
 	@Override
 	public void run() {
 		for(int i = 0; i < 100; i++)
-			lista.add("Thread "+numeroThread+" - "+i+".");
+			lista.adicionaElementos("Thread "+numeroThread+" - "+i+".");
 	}
 
 }
