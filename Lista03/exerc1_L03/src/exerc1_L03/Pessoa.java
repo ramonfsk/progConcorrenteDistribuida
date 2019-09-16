@@ -19,9 +19,8 @@ public class Pessoa extends Thread {
 	
 	@Override
 	public void run() {
-		while(true) {
-			estaciona();
-		}
+		while(true)
+			this.estaciona();
 	}
 
 	public void estaciona() {
@@ -29,16 +28,16 @@ public class Pessoa extends Thread {
 			if(this.tipo == TipoPessoa.Professor) {
 				System.out.println("*** [Limite "+cntVagas+" máximo, professores tem a preferência!] ***");
 				this.setPriority(MAX_PRIORITY);
-				entrarNoEstacionamento();
+				this.entrarNoEstacionamento();
 			} else if(this.tipo == TipoPessoa.Funcionario) {
 				this.setPriority(MIN_PRIORITY);
-				entrarNoEstacionamento();
+				this.entrarNoEstacionamento();
 			} else {
 				this.setPriority(MIN_PRIORITY);
-				entrarNoEstacionamento();
+				this.entrarNoEstacionamento();
 			}
 		} else
-			entrarNoEstacionamento();
+			this.entrarNoEstacionamento();
 		System.out.println("Qtd. vagas: "+cntVagas+"\n\n");
 	}
 	
