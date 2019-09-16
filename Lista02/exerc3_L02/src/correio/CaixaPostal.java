@@ -24,7 +24,8 @@ public class CaixaPostal {
 			System.out.println(carta.getNome()+" depositada com sucesso na cidade "+cidade+"! \nTOTAL: "+this.cartas.size()+" cartas.");
 		}
 		//this.cartas.addAll(cartas);
-		notifyAll();
+		if(this.checarQtdCartas(5))
+			notifyAll();
 	}
 	
 	public synchronized Vector<Carta> retirarCartasParaEntrega(int qtdCartas) {
@@ -35,9 +36,9 @@ public class CaixaPostal {
 			crtsTmp.add(cartas.get(i));
 		}
 		
-		cartas.removeAll(cartas);
+		for(int i = 0; i < qtdCartas; i++)
+			cartas.remove(cartas.get(i));
 		
-		notifyAll();
 		return crtsTmp;
 	}
 	
