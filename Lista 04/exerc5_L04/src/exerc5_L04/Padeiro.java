@@ -1,4 +1,4 @@
-package exerc4_L04;
+package exerc5_L04;
 
 public class Padeiro extends Thread {
 
@@ -23,14 +23,14 @@ public class Padeiro extends Thread {
 	public void fazerMassa() {
 		try {
 			long tmpRnd = (long) (Math.random() * (10000 + 1));
-			System.out.println("O "+this.getName()+" está fazendo a massa do pão...");
+			System.out.println("### O "+this.getName()+" está fazendo a massa do pão...");
 			Thread.sleep(tmpRnd);
 			this.pao = Pao.criaPao(((int) tmpRnd));
-			System.out.println("*** O "+this.getName()+" finalizou o "+this.pao.getNome()+", tem "+this.pao.getPeso()+"g! ***");
+			System.out.println("### O "+this.getName()+" finalizou o "+this.pao.getNome()+", tem "+this.pao.getPeso()+"g!");
 		} catch (InterruptedException e) { e.printStackTrace(); }
 	}
 	
 	public void assarPao() {
-		this.forno.assarPao(this, this.pao);
+		this.forno.colocarPaoNoForno(this, this.pao);
 	}
 }

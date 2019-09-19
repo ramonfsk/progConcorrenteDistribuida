@@ -1,4 +1,4 @@
-package exerc4_L04;
+package exerc5_L04;
 
 public class Principal {
 	public static void main(String[] args) {

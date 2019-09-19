@@ -1,4 +1,4 @@
-package exerc4_L04;
+package exerc5_L04;
 
 public class Gerente extends Thread {
 
@@ -29,6 +29,7 @@ public class Gerente extends Thread {
 			System.out.println("%%% O "+this.getName()+" trocou o botijão!");
 			synchronized (this.forno) {
 				this.forno.notifyAll();
+				System.out.println("!!! Notificando os padeiros !!!");
 			}
 		} catch (InterruptedException e) { e.printStackTrace(); }
 	}

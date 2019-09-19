@@ -1,8 +1,8 @@
-package exerc4_L04;
+package exerc5_L04;
 
 public class Botijao {
 	
-	private static int cntBotijoes = 1;
+	private static int cntBotijoes = 0;
 	private String nome;
 	private long qtdGas;
 	private long tamGas;
@@ -10,7 +10,7 @@ public class Botijao {
 	public Botijao(long tamGas) {
 		this.nome = "Botijão "+cntBotijoes;
 		this.tamGas = tamGas * 60;
-		this.qtdGas = tamGas * 60;
+		this.qtdGas = this.tamGas;
 		cntBotijoes++;
 	}
 	
@@ -20,7 +20,7 @@ public class Botijao {
 	
 	public synchronized void consomeGas(long qtd) {
 		this.qtdGas -= qtd;
-		System.out.println("*** [CONSUMIDO "+qtd+"s DE GÁS, RESTAM "+this.qtdGas+"s!] ***");
+		System.out.println("*** Consumido "+qtd+"s de gás, restam "+this.qtdGas+"s!");
 	}
 	
 	public long obtemQntGasDisponivel() {
