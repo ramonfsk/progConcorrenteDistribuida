@@ -1,4 +1,4 @@
-package exerc5_L04;
+package exerc6_L04;
 
 public class Padeiro extends Thread {
 
@@ -16,16 +16,7 @@ public class Padeiro extends Thread {
 	public void run() {
 		while(true) {
 			this.fazerMassa();
-			if(this.forno.estaEmUso()) {
-				synchronized (this.forno) {
-					try {
-						this.forno.wait();
-					} catch (InterruptedException e) { e.printStackTrace(); }
-				}
-				this.setPriority(MIN_PRIORITY);
-			}
 			this.assarPao();
-			this.setPriority(NORM_PRIORITY);
 		}
 	}
 	
